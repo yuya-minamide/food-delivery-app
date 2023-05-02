@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Header } from "../components/";
+import { Header } from "../components";
 import styled from "styled-components";
 
 const MainContainer = styled.main`
