@@ -162,7 +162,7 @@ export function Header() {
 						{showMenu && (
 							<PersonalContainer>
 								<Link href="/">Add food</Link>
-								<Link href="/">Login</Link>
+								<Link href="login">Login</Link>
 							</PersonalContainer>
 						)}
 					</li>

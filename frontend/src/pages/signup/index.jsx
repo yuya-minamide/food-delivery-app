@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -71,6 +72,7 @@ const FormContainer = styled.div`
 `;
 
 const Signup = () => {
+	const router = useRouter();
 	const [data, setData] = useState({
 		email: "",
 		password: "",
@@ -89,7 +91,7 @@ const Signup = () => {
 		const { email, password, confirmPassword } = data;
 		if (email && password && confirmPassword) {
 			if (password === confirmPassword) {
-				alert("Successful!!");
+				router.push("/login");
 			} else {
 				alert("Password and confirm password are not equal");
 			}
