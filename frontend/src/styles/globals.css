@@ -3,6 +3,11 @@
 	src: url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600&display=swap");
 }
 
+@font-face {
+	font-family: "Alegreya", serif;
+	src: url("https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&display=swap");
+}
+
 * {
 	box-sizing: border-box;
 	padding: 0;
