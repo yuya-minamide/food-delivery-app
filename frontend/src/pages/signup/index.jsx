@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -86,22 +87,34 @@ const Signup = () => {
 		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const { email, password, confirmPassword } = data;
 		if (email && password && confirmPassword) {
 			if (password === confirmPassword) {
-				router.push("/login");
+				const fetchData = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/signup`, {
+					method: "POST",
+					headers: {
+						"content-type": "application/json",
+					},
+					body: JSON.stringify(data),
+				});
+
+				const resData = await fetchData.json();
+
+				toast.success(resData.message);
+				if (resData.alert) router.push("/login");
 			} else {
-				alert("Password and confirm password are not equal");
+				toast.error("Password and confirm password are not equal");
 			}
 		} else {
-			alert("Please enter required fields");
+			toast.error("Please enter required fields");
 		}
 	};
 
 	return (
 		<Container>
+			<Toaster position="top-center" />
 			<FormContainer>
 				<h1>Sign up</h1>
 				<form onSubmit={handleSubmit}>

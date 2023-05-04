@@ -1,5 +1,5 @@
-import Head from "next/head";
 import { Header } from "../components";
+import Head from "next/head";
 import styled from "styled-components";
 
 const MainContainer = styled.main`
@@ -15,6 +15,7 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+
 			<Header />
 			<MainContainer>Home</MainContainer>
 		</>
