@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 8080;
 
 connectDB();
 
+// User
 const userSchema = mongoose.Schema({
 	nickName: {
 		type: String,
@@ -32,13 +33,34 @@ const userSchema = mongoose.Schema({
 	},
 });
 
+// Store
+const storeSchema = mongoose.Schema({
+	storeName: {
+		type: String,
+		required: true,
+	},
+	email: {
+		type: String,
+		required: true,
+	},
+	password: {
+		type: String,
+		required: true,
+	},
+	date: {
+		type: Date,
+		default: Date.now,
+	},
+});
+
 const userModel = mongoose.model("user", userSchema);
+const storeModel = mongoose.model("store", storeSchema);
 
 app.get("/", (req, res) => {
 	res.send("Server is running!");
 });
 
-// Sign up
+// User sign up
 app.post("/signup", (req, res) => {
 	const { email } = req.body;
 
@@ -61,18 +83,51 @@ app.post("/signup", (req, res) => {
 		});
 });
 
+// Store sign up
+app.post("/storesignup", (req, res) => {
+	const { email } = req.body;
+
+	storeModel
+		.findOne({ email: email })
+		.then((result) => {
+			if (result) {
+				res.send({ message: "Email id is already register!", alert: false });
+			} else {
+				const data = new storeModel(req.body);
+				return data.save();
+			}
+		})
+		.then(() => {
+			res.send({ message: "Successfully sign up", alert: true });
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).send({ message: "Internal server error", alert: false });
+		});
+});
+
 // Login
 app.post("/login", async (req, res) => {
 	const { email, password } = req.body;
 
 	try {
-		const result = await userModel.findOne({ email: email, password: password });
-		if (result) {
+		const userResult = await userModel.findOne({ email: email, password: password });
+		const storeResult = await storeModel.findOne({ email: email, password: password });
+
+		if (userResult) {
 			const dataSend = {
-				_id: result._id,
-				nickName: result.nickName,
-				email: result.email,
-				password: result.password,
+				_id: userResult._id,
+				nickName: userResult.nickName,
+				email: userResult.email,
+				password: userResult.password,
+			};
+			res.send({ message: "Login is successfully", alert: true, data: dataSend });
+		} else if (storeResult) {
+			const dataSend = {
+				_id: storeResult._id,
+				storeName: storeResult.storeName,
+				email: storeResult.email,
+				password: storeResult.password,
 			};
 			res.send({ message: "Login is successfully", alert: true, data: dataSend });
 		} else {
