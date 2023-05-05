@@ -2,9 +2,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import { storeLogin } from "../../redux/storeSlice";
-import { userLogin } from "../../redux/userSlice";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -75,14 +72,14 @@ const FormContainer = styled.div`
 	}
 `;
 
-const Login = () => {
+const StoreSignup = () => {
 	const router = useRouter();
 	const [data, setData] = useState({
+		storeName: "",
 		email: "",
 		password: "",
+		confirmPassword: "",
 	});
-
-	const dispatch = useDispatch();
 
 	const handleOnChange = (e) => {
 		const { name, value } = e.target;
@@ -93,26 +90,23 @@ const Login = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const { email, password } = data;
+		const { storeName, email, password, confirmPassword } = data;
+		if (storeName && email && password && confirmPassword) {
+			if (password === confirmPassword) {
+				const fetchData = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/storesignup`, {
+					method: "POST",
+					headers: {
+						"content-type": "application/json",
+					},
+					body: JSON.stringify(data),
+				});
 
-		if (email && password) {
-			const fetchData = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/login`, {
-				method: "POST",
-				headers: {
-					"content-type": "application/json",
-				},
-				body: JSON.stringify(data),
-			});
+				const resData = await fetchData.json();
 
-			const resData = await fetchData.json();
-
-			toast.success(resData.message);
-			if (resData.alert) {
-				dispatch(userLogin(resData));
-				dispatch(storeLogin(resData));
-				setTimeout(() => {
-					router.push("/");
-				}, 1000);
+				toast.success(resData.message);
+				if (resData.alert) router.push("/login");
+			} else {
+				toast.error("Password and confirm password are not equal");
 			}
 		} else {
 			toast.error("Please enter required fields");
@@ -123,14 +117,18 @@ const Login = () => {
 		<Container>
 			<Toaster position="top-center" />
 			<FormContainer>
-				<h1>Login</h1>
+				<h1>Store sign up</h1>
 				<form onSubmit={handleSubmit}>
+					<div>
+						<label>Store name</label>
+						<input type="text" id="storeName" name="storeName" value={data.storeName} onChange={handleOnChange} />
+					</div>
 					<div>
 						<label>E-mail</label>
 						<input type="email" id="email" name="email" value={data.email} onChange={handleOnChange} />
 					</div>
 					<div>
-						<label>Password</label>
+						<label>Create password</label>
 						<input
 							type="password"
 							id="password"
@@ -140,13 +138,24 @@ const Login = () => {
 							minLength={6}
 						/>
 					</div>
-					<button type="submit">Login</button>
+					<div>
+						<label>Confirm password</label>
+						<input
+							type="password"
+							id="confirmPassword"
+							name="confirmPassword"
+							value={data.confirmPassword}
+							onChange={handleOnChange}
+							minLength={6}
+						/>
+					</div>
+					<button type="submit">Sign up</button>
 				</form>
 				<p>
-					Do not have an account? <Link href="/signup">Sign up page</Link>
+					Already have an account? <Link href="/login">Login page</Link>
 				</p>
 				<p>
-					Would you like to be <Link href="/storesignup">seller</Link>?
+					Would you like to be <Link href="/">user</Link>?
 				</p>
 				<p>
 					Just visit to <Link href="/">Home page</Link>
@@ -156,4 +165,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default StoreSignup;

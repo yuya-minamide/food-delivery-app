@@ -5,7 +5,8 @@ import { AiOutlineHome } from "react-icons/ai";
 import { BsCart4, BsFillPersonFill } from "react-icons/bs";
 import { MdOutlineFastfood, MdRestaurantMenu } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "@/redux/userSlice";
+import { storeLogout } from "@/redux/storeSlice";
+import { userLogout } from "@/redux/userSlice";
 import styled from "styled-components";
 
 const HeaderContainer = styled.header`
@@ -82,31 +83,33 @@ const NavContainer = styled.div`
 				svg {
 					margin-right: 12px;
 					font-size: 1.6rem;
-				}
-
-				p {
-					margin-left: 0.5rem;
-					color: red;
+					transition: all 0.2s ease;
 				}
 			}
 
-			button {
-				background-color: transparent;
-				border: none;
-				color: black;
+			svg {
+				color: #000;
 				font-size: 1.6rem;
-				cursor: pointer;
 				transition: all 0.2s ease;
 
 				&:hover {
 					color: white;
 				}
-
-				p {
-					font-size: 0.9rem;
-				}
 			}
 		}
+	}
+`;
+
+const Name = styled.p`
+	background-color: transparent;
+	border: none;
+	color: black;
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: all 0.2s ease;
+
+	&:hover {
+		color: white;
 	}
 `;
 
@@ -135,6 +138,7 @@ const PersonalContainer = styled.div`
 		font-size: 1.2rem;
 		margin-bottom: 12px;
 		color: #000;
+		transition: all 0.2s ease;
 
 		&:hover {
 			color: #fff;
@@ -149,6 +153,7 @@ const PersonalContainer = styled.div`
 export function Header() {
 	const [showMenu, setShowMenu] = useState(false);
 	const userData = useSelector((state) => state.user);
+	const storeData = useSelector((state) => state.store);
 	const dispatch = useDispatch();
 
 	const handleShowMenu = () => {
@@ -156,7 +161,8 @@ export function Header() {
 	};
 
 	const handleLogout = () => {
-		dispatch(logout());
+		dispatch(userLogout());
+		dispatch(storeLogout());
 		toast.success("Logout successfully");
 	};
 
@@ -188,11 +194,25 @@ export function Header() {
 						</Link>
 					</li>
 					<li onClick={handleShowMenu}>
-						<button>{userData.nickName ? <p>{userData.nickName}</p> : <BsFillPersonFill />}</button>
+						{storeData.storeName ? (
+							<Name>{storeData.storeName}</Name>
+						) : userData.nickName ? (
+							<Name>{userData.nickName}</Name>
+						) : (
+							<BsFillPersonFill />
+						)}
+
 						{showMenu && (
 							<PersonalContainer>
-								<Link href="/">Add food</Link>
-								{userData.nickName ? <p onClick={handleLogout}>Logout</p> : <Link href="login">Login</Link>}
+								{storeData.storeName ? <Link href="/">Add food</Link> : null}
+
+								{storeData.storeName ? (
+									<p onClick={handleLogout}>Logout</p>
+								) : userData.nickName ? (
+									<p onClick={handleLogout}>Logout</p>
+								) : (
+									<Link href="login">Login</Link>
+								)}
 							</PersonalContainer>
 						)}
 					</li>

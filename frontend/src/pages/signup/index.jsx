@@ -155,7 +155,7 @@ const Signup = () => {
 					Already have an account? <Link href="/login">Login page</Link>
 				</p>
 				<p>
-					Would you like to be <Link href="/">seller</Link>?
+					Would you like to be <Link href="/storesignup">seller</Link>?
 				</p>
 				<p>
 					Just visit to <Link href="/">Home page</Link>
