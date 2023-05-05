@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineHome } from "react-icons/ai";
 import { BsCart4, BsFillPersonFill } from "react-icons/bs";
 import { MdOutlineFastfood, MdRestaurantMenu } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { storeLogout } from "@/redux/storeSlice";
+import { userLogout } from "@/redux/userSlice";
 import styled from "styled-components";
 
 const HeaderContainer = styled.header`
@@ -79,20 +83,13 @@ const NavContainer = styled.div`
 				svg {
 					margin-right: 12px;
 					font-size: 1.6rem;
-				}
-
-				p {
-					margin-left: 0.5rem;
-					color: red;
+					transition: all 0.2s ease;
 				}
 			}
 
-			button {
-				background-color: transparent;
-				border: none;
-				color: black;
+			svg {
+				color: #000;
 				font-size: 1.6rem;
-				cursor: pointer;
 				transition: all 0.2s ease;
 
 				&:hover {
@@ -100,6 +97,19 @@ const NavContainer = styled.div`
 				}
 			}
 		}
+	}
+`;
+
+const Name = styled.p`
+	background-color: transparent;
+	border: none;
+	color: black;
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: all 0.2s ease;
+
+	&:hover {
+		color: white;
 	}
 `;
 
@@ -121,16 +131,44 @@ const PersonalContainer = styled.div`
 			font-size: 0.8rem;
 		}
 	}
+
+	p {
+		cursor: pointer;
+		border-bottom: 1px solid black;
+		font-size: 1.2rem;
+		margin-bottom: 12px;
+		color: #000;
+		transition: all 0.2s ease;
+
+		&:hover {
+			color: #fff;
+		}
+
+		@media screen and (max-width: 520px) {
+			font-size: 0.8rem;
+		}
+	}
 `;
 
 export function Header() {
 	const [showMenu, setShowMenu] = useState(false);
+	const userData = useSelector((state) => state.user);
+	const storeData = useSelector((state) => state.store);
+	const dispatch = useDispatch();
+
 	const handleShowMenu = () => {
 		setShowMenu((preve) => !preve);
 	};
 
+	const handleLogout = () => {
+		dispatch(userLogout());
+		dispatch(storeLogout());
+		toast.success("Logout successfully");
+	};
+
 	return (
 		<HeaderContainer>
+			<Toaster position="top-center" />
 			<LogoContainer>
 				<MdOutlineFastfood />
 				<div>Food delivery</div>
@@ -156,13 +194,25 @@ export function Header() {
 						</Link>
 					</li>
 					<li onClick={handleShowMenu}>
-						<button>
+						{storeData.storeName ? (
+							<Name>{storeData.storeName}</Name>
+						) : userData.nickName ? (
+							<Name>{userData.nickName}</Name>
+						) : (
 							<BsFillPersonFill />
-						</button>
+						)}
+
 						{showMenu && (
 							<PersonalContainer>
-								<Link href="/">Add food</Link>
-								<Link href="/">Login</Link>
+								{storeData.storeName ? <Link href="/">Add food</Link> : null}
+
+								{storeData.storeName ? (
+									<p onClick={handleLogout}>Logout</p>
+								) : userData.nickName ? (
+									<p onClick={handleLogout}>Logout</p>
+								) : (
+									<Link href="login">Login</Link>
+								)}
 							</PersonalContainer>
 						)}
 					</li>
