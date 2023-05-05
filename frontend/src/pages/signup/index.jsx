@@ -75,6 +75,7 @@ const FormContainer = styled.div`
 const Signup = () => {
 	const router = useRouter();
 	const [data, setData] = useState({
+		nickName: "",
 		email: "",
 		password: "",
 		confirmPassword: "",
@@ -89,8 +90,8 @@ const Signup = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const { email, password, confirmPassword } = data;
-		if (email && password && confirmPassword) {
+		const { nickName, email, password, confirmPassword } = data;
+		if (nickName && email && password && confirmPassword) {
 			if (password === confirmPassword) {
 				const fetchData = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/signup`, {
 					method: "POST",
@@ -118,6 +119,10 @@ const Signup = () => {
 			<FormContainer>
 				<h1>Sign up</h1>
 				<form onSubmit={handleSubmit}>
+					<div>
+						<label>Nick name</label>
+						<input type="text" id="nickName" name="nickName" value={data.nickName} onChange={handleOnChange} />
+					</div>
 					<div>
 						<label>E-mail</label>
 						<input type="email" id="email" name="email" value={data.email} onChange={handleOnChange} />

@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineHome } from "react-icons/ai";
 import { BsCart4, BsFillPersonFill } from "react-icons/bs";
 import { MdOutlineFastfood, MdRestaurantMenu } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/redux/userSlice";
 import styled from "styled-components";
 
 const HeaderContainer = styled.header`
@@ -98,6 +101,10 @@ const NavContainer = styled.div`
 				&:hover {
 					color: white;
 				}
+
+				p {
+					font-size: 0.9rem;
+				}
 			}
 		}
 	}
@@ -121,16 +128,41 @@ const PersonalContainer = styled.div`
 			font-size: 0.8rem;
 		}
 	}
+
+	p {
+		cursor: pointer;
+		border-bottom: 1px solid black;
+		font-size: 1.2rem;
+		margin-bottom: 12px;
+		color: #000;
+
+		&:hover {
+			color: #fff;
+		}
+
+		@media screen and (max-width: 520px) {
+			font-size: 0.8rem;
+		}
+	}
 `;
 
 export function Header() {
 	const [showMenu, setShowMenu] = useState(false);
+	const userData = useSelector((state) => state.user);
+	const dispatch = useDispatch();
+
 	const handleShowMenu = () => {
 		setShowMenu((preve) => !preve);
 	};
 
+	const handleLogout = () => {
+		dispatch(logout());
+		toast.success("Logout successfully");
+	};
+
 	return (
 		<HeaderContainer>
+			<Toaster position="top-center" />
 			<LogoContainer>
 				<MdOutlineFastfood />
 				<div>Food delivery</div>
@@ -156,13 +188,11 @@ export function Header() {
 						</Link>
 					</li>
 					<li onClick={handleShowMenu}>
-						<button>
-							<BsFillPersonFill />
-						</button>
+						<button>{userData.nickName ? <p>{userData.nickName}</p> : <BsFillPersonFill />}</button>
 						{showMenu && (
 							<PersonalContainer>
 								<Link href="/">Add food</Link>
-								<Link href="login">Login</Link>
+								{userData.nickName ? <p onClick={handleLogout}>Logout</p> : <Link href="login">Login</Link>}
 							</PersonalContainer>
 						)}
 					</li>

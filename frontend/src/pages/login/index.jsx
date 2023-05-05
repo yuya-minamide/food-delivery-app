@@ -1,5 +1,9 @@
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../redux/userSlice";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -71,10 +75,13 @@ const FormContainer = styled.div`
 `;
 
 const Login = () => {
+	const router = useRouter();
 	const [data, setData] = useState({
 		email: "",
 		password: "",
 	});
+
+	const dispatch = useDispatch();
 
 	const handleOnChange = (e) => {
 		const { name, value } = e.target;
@@ -83,18 +90,36 @@ const Login = () => {
 		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const { email, password } = data;
+
 		if (email && password) {
-			alert("Successful!!");
+			const fetchData = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/login`, {
+				method: "POST",
+				headers: {
+					"content-type": "application/json",
+				},
+				body: JSON.stringify(data),
+			});
+
+			const resData = await fetchData.json();
+
+			toast.success(resData.message);
+			if (resData.alert) {
+				dispatch(login(resData));
+				setTimeout(() => {
+					router.push("/");
+				}, 1000);
+			}
 		} else {
-			alert("Please enter required fields");
+			toast.error("Please enter required fields");
 		}
 	};
 
 	return (
 		<Container>
+			<Toaster position="top-center" />
 			<FormContainer>
 				<h1>Login</h1>
 				<form onSubmit={handleSubmit}>
