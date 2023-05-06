@@ -1,6 +1,8 @@
 import { Header } from "@/components";
+import { useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import styled from "styled-components";
+import { ImagetoBase64 } from "@/utility/ImagetoBase64";
 
 const Title = styled.h1`
 	padding: 100px 0 30px 0;
@@ -58,10 +60,16 @@ const FormContainer = styled.div`
 			border-radius: 6px;
 			padding: 30px 60px;
 			text-align: center;
+			margin-top: 10px;
 
 			svg {
 				font-size: 1.6rem;
 				color: #808080;
+			}
+
+			input {
+				opacity: 0;
+				cursor: pointer;
 			}
 		}
 	}
@@ -89,52 +97,96 @@ const FormContainer = styled.div`
 `;
 
 const AddFood = () => {
+	const [data, setData] = useState({
+		restaurantname: "",
+		name: "",
+		category: "",
+		price: "",
+		image: "",
+		description: "",
+	});
+
+	const handleOnChange = (e) => {
+		const { name, value } = e.target;
+
+		setData((preve) => {
+			return {
+				...preve,
+				[name]: value,
+			};
+		});
+	};
+
+	const uploadImage = async (e) => {
+		const data = await ImagetoBase64(e.target.files[0]);
+
+		setData((preve) => {
+			return {
+				...preve,
+				image: data,
+			};
+		});
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log(data);
+	};
+
 	return (
 		<>
 			<Header />
 			<Title>Add food</Title>
 			<Container>
 				<FormContainer>
-					<form>
+					<form onSubmit={handleSubmit}>
 						<div>
-							<label htmlFor="restaurantName">Restaurant name</label>
-							<input type="text" name="restaurantName" />
+							<label htmlFor="restaurantname">Restaurant name</label>
+							<input type="text" name="restaurantname" onChange={handleOnChange} />
 						</div>
 
 						<div>
 							<label htmlFor="name">Name</label>
-							<input type="text" name="name" />
+							<input type="text" name="name" onChange={handleOnChange} />
 						</div>
 
 						<div>
 							<label htmlFor="category">Category</label>
-							<select id="category">
-								<option value="">Japanese</option>
-								<option value="">Chinese</option>
-								<option value="">Indian chicken</option>
-								<option value="">American noodle</option>
-								<option value="">Mexican</option>
-								<option value="">Other</option>
+							<select id="category" name="category" onChange={handleOnChange}>
+								<option value="select">Select</option>
+								<option value="japanese">Japanese</option>
+								<option value="chinese">Chinese</option>
+								<option value="indian">Indian chicken</option>
+								<option value="american">American noodle</option>
+								<option value="mexican">Mexican</option>
+								<option value="other">Other</option>
 							</select>
 						</div>
 
 						<div>
 							<label htmlFor="price">Price</label>
-							<input type="text" />
+							<input type="text" name="price" onChange={handleOnChange} />
 						</div>
 
 						<div>
-							<label htmlFor="image">Image</label>
-							<div id="image">
-								<span>
-									<AiOutlineCloudUpload />
-								</span>
-							</div>
+							<label htmlFor="image">
+								Image
+								<div>
+									<input type="file" id="image" name="image" onChange={uploadImage} />
+									{data.image ? (
+										<img src={data.image} />
+									) : (
+										<span>
+											<AiOutlineCloudUpload />
+										</span>
+									)}
+								</div>
+							</label>
 						</div>
 
 						<div>
 							<label htmlFor="description">Description</label>
-							<textarea rows="2"></textarea>
+							<textarea rows="2" name="description" onChange={handleOnChange}></textarea>
 						</div>
 
 						<button>Save</button>
