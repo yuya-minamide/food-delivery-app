@@ -204,7 +204,7 @@ export function Header() {
 
 						{showMenu && (
 							<PersonalContainer>
-								{storeData.storeName ? <Link href="/">Add food</Link> : null}
+								{storeData.storeName ? <Link href="/addfood">Add food</Link> : null}
 
 								{storeData.storeName ? (
 									<p onClick={handleLogout}>Logout</p>
