@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 
 const app = express();
 app.use(cors());
+app.use(express.json({ limit: "10mb" }));
 app.use(express.json());
 dotenv.config();
 
@@ -137,6 +138,25 @@ app.post("/login", async (req, res) => {
 		console.log(err);
 		res.send({ message: "Error occurred", alert: false });
 	}
+});
+
+// Food section
+const foodSchema = mongoose.Schema({
+	restaurantname: String,
+	name: String,
+	category: String,
+	price: String,
+	image: String,
+	description: String,
+});
+
+const foodModel = mongoose.model("food", foodSchema);
+
+app.post("/addfood", async (req, res) => {
+	const data = await foodModel(req.body);
+	data.save();
+
+	res.send({ message: "Upload successfully!" });
 });
 
 app.listen(PORT, () => {
