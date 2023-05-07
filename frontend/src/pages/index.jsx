@@ -1,8 +1,24 @@
 import { Banner, Header, SelectFood } from "../components";
 import Head from "next/head";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setDataFood } from "../redux/foodSlice";
 import styled from "styled-components";
 
 export default function Home() {
+	const dispatch = useDispatch();
+	const foodData = useSelector((state) => state.food);
+
+	useEffect(() => {
+		(async () => {
+			const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/food`);
+			const resData = await res.json();
+			dispatch(setDataFood(resData));
+		})();
+	}, []);
+
+	console.log(foodData);
+
 	return (
 		<>
 			<Head>
