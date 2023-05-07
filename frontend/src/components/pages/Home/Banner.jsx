@@ -1,11 +1,8 @@
 import styled from "styled-components";
 
 const BannerVideo = styled.video`
-	position: absolute;
-	top: 0;
-	left: 0;
 	width: 100%;
-	height: 100%;
+	height: 100vh;
 	object-fit: cover;
 `;
 
@@ -18,6 +15,7 @@ const BannerTittleContainer = styled.div`
 	display: flex;
 	justify-content: left;
 	align-items: center;
+
 	padding-left: 90px;
 
 	@media screen and (max-width: 960px) {
@@ -42,7 +40,7 @@ const BannerTittleContainer = styled.div`
 
 export function Banner() {
 	return (
-		<div>
+		<>
 			<BannerVideo autoPlay muted loop>
 				<source src="/home-banner.mp4" type="video/mp4" />
 			</BannerVideo>
@@ -52,6 +50,6 @@ export function Banner() {
 					<br /> Surfers Anytime, Anywhere
 				</h1>
 			</BannerTittleContainer>
-		</div>
+		</>
 	);
 }

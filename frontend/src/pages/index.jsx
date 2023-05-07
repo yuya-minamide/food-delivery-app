@@ -1,4 +1,4 @@
-import { Banner, Header } from "../components";
+import { Banner, Header, SelectFood } from "../components";
 import Head from "next/head";
 import styled from "styled-components";
 
@@ -14,6 +14,7 @@ export default function Home() {
 
 			<Header />
 			<Banner />
+			<SelectFood />
 		</>
 	);
 }
