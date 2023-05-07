@@ -1,10 +1,6 @@
-import { Header } from "../components";
+import { Banner, Header } from "../components";
 import Head from "next/head";
 import styled from "styled-components";
-
-const MainContainer = styled.main`
-	padding-top: 90px;
-`;
 
 export default function Home() {
 	return (
@@ -17,7 +13,7 @@ export default function Home() {
 			</Head>
 
 			<Header />
-			<MainContainer>Home</MainContainer>
+			<Banner />
 		</>
 	);
 }
