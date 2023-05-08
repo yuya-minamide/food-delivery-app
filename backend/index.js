@@ -155,8 +155,12 @@ const foodModel = mongoose.model("food", foodSchema);
 app.post("/addfood", async (req, res) => {
 	const data = await foodModel(req.body);
 	data.save();
-
 	res.send({ message: "Upload successfully!" });
+});
+
+app.get("/food", async (req, res) => {
+	const data = await foodModel.find({});
+	res.send(JSON.stringify(data));
 });
 
 app.listen(PORT, () => {
