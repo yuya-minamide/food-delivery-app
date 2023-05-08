@@ -15,7 +15,6 @@ const BannerTittleContainer = styled.div`
 	display: flex;
 	justify-content: left;
 	align-items: center;
-
 	padding-left: 90px;
 
 	@media screen and (max-width: 960px) {

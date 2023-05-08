@@ -4,6 +4,8 @@
 
 // Header
 export { Header } from "./common/Header/Header";
+// Footer
+export { Footer } from "./common/Footer/Footer";
 
 /**
  * Pages

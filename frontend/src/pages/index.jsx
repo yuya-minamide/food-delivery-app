@@ -1,4 +1,4 @@
-import { Banner, Header, SelectFood } from "../components";
+import { Banner, Footer, Header, SelectFood } from "../components";
 import Head from "next/head";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,6 +29,7 @@ export default function Home() {
 			<Header />
 			<Banner />
 			<SelectFood foodData={foodData} />
+			<Footer />
 		</>
 	);
 }
