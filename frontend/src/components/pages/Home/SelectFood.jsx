@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HomeFoodCard } from "../../index";
+import { FoodDetail, HomeFoodCard } from "../../index";
 import styled from "styled-components";
 
 const SelectFoodContainer = styled.div`
@@ -56,9 +56,18 @@ const SeeMoreButtonContainer = styled.div`
 
 export function SelectFood({ foodData }) {
 	const [numCards, setNumCards] = useState(8);
+	const [selectedFood, setSelectedFood] = useState(null);
 
 	const handleSeeMoreClick = () => {
 		setNumCards(numCards + 8);
+	};
+
+	const handleFoodClick = (food) => {
+		setSelectedFood(food);
+	};
+
+	const handleFoodDetailClose = () => {
+		setSelectedFood(null);
 	};
 
 	const foodsToDisplay = Array.isArray(foodData.foodList) ? foodData.foodList.slice(0, numCards) : [];
@@ -68,7 +77,7 @@ export function SelectFood({ foodData }) {
 			<SelectTittle>Select foods</SelectTittle>
 			<CardsWrapper>
 				{foodsToDisplay.map((food, idx) => (
-					<CardContainer key={idx}>
+					<CardContainer key={idx} onClick={() => handleFoodClick(food)}>
 						<HomeFoodCard food={food} />
 					</CardContainer>
 				))}
@@ -77,6 +86,7 @@ export function SelectFood({ foodData }) {
 			<SeeMoreButtonContainer>
 				<button onClick={handleSeeMoreClick}>See more</button>
 			</SeeMoreButtonContainer>
+			{selectedFood && <FoodDetail selectedFood={selectedFood} onClose={handleFoodDetailClose} />}
 		</SelectFoodContainer>
 	);
 }
