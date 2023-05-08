@@ -17,8 +17,6 @@ export default function Home() {
 		})();
 	}, []);
 
-	console.log(foodData);
-
 	return (
 		<>
 			<Head>
@@ -30,7 +28,7 @@ export default function Home() {
 
 			<Header />
 			<Banner />
-			<SelectFood />
+			<SelectFood foodData={foodData} />
 		</>
 	);
 }
