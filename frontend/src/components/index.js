@@ -6,6 +6,8 @@
 export { Header } from "./common/Header/Header";
 // Footer
 export { Footer } from "./common/Footer/Footer";
+// Food detail
+export { FoodDetail } from "./common/FoodDetail/FoodDetail";
 
 /**
  * Pages
