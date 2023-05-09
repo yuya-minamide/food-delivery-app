@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { FoodDetail, HomeFoodCard } from "@/components";
+import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import styled from "styled-components";
 

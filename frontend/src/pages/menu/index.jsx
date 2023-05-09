@@ -1,7 +1,7 @@
-import { useEffect } from "react";
 import { Footer, Header, MenuContent } from "@/components";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setDataFood } from "../../redux/foodSlice";
+import { setDataFood } from "@/redux/foodSlice";
 
 const Menu = () => {
 	const dispatch = useDispatch();
