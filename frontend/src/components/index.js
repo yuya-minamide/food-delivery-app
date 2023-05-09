@@ -17,3 +17,6 @@ export { FoodDetail } from "./common/FoodDetail/FoodDetail";
 export { Banner } from "./pages/Home/Banner";
 export { SelectFood } from "./pages/Home/SelectFood";
 export { HomeFoodCard } from "./pages/Home/HomeFoodCard";
+
+// Menu page
+export { MenuContent } from "./pages/Menu/MenuContent";

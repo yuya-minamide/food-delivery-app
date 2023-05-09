@@ -6,7 +6,7 @@ const FoodCardContainer = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
-	background-color: #8080807c;
+	background-color: #8080804f;
 	padding: 14px;
 	margin-bottom: 20px;
 	border-radius: 10px;
@@ -29,11 +29,11 @@ const FoodName = styled.p`
 `;
 
 const FoodPrice = styled.p`
-	color: red;
+	font-size: 1.2rem;
+	color: #ff3939;
 `;
 
 export function HomeFoodCard({ food }) {
-	console.log(food);
 	return (
 		<FoodCardContainer>
 			<FoodImage src={food.image} width={300} height={300} alt="food-image" />
