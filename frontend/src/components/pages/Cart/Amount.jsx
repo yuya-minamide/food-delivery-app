@@ -27,7 +27,9 @@ export function Amount() {
 		<AmountContainer>
 			<p>Total quantity: {totalQuantity}</p>
 			<p>Total amount: ${totalAmount}</p>
-			<button onClick={handleBuy}>Buy</button>
+			<button disabled={totalQuantity === 0} onClick={handleBuy}>
+				Buy
+			</button>
 		</AmountContainer>
 	);
 }
