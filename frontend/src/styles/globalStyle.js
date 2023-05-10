@@ -1,6 +1,10 @@
+import { createGlobalStyle } from "styled-components";
+
+export const GlobalStyle = createGlobalStyle`
+
 @font-face {
-	font-family: "Noto Sans";
-	src: url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600&display=swap");
+	font-family: "Lora", serif;
+	src: url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap");
 }
 
 @font-face {
@@ -26,9 +30,11 @@ html {
 }
 
 body {
-	font-family: "Noto Sans", Arial, sans-serif;
-	color: #fff;
-	background: #05011e;
+	font-family: "Lora", serif;
+	/* color: #fff;
+	background: #05011e; */
+	color: #000;
+	background: #fff;
 	max-width: 100vw;
 	overflow-x: hidden;
 }
@@ -55,3 +61,9 @@ img {
 	width: 100%;
 	object-fit: cover;
 }
+
+button {
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+`;

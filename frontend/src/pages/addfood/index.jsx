@@ -1,101 +1,9 @@
-import { Header } from "@/components";
+import { Footer, Header } from "@/components";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import styled from "styled-components";
+import { Container, FormContainer, Title } from "@/styles/pages/addfood/";
 import { ImagetoBase64 } from "@/utility/ImagetoBase64";
-
-const Title = styled.h1`
-	padding: 100px 0 30px 0;
-	text-align: center;
-	text-decoration: underline;
-`;
-
-const Container = styled.div`
-	width: 100%;
-	height: 100vh;
-	color: #000000;
-`;
-
-const FormContainer = styled.div`
-	background-color: #f2f0eaed;
-	border: 1px solid #808080;
-	border-radius: 10px;
-	padding: 40px 100px;
-	margin: 0 auto;
-	width: 600px;
-
-	@media screen and (max-width: 520px) {
-		padding: 80px 20px 0 20px;
-		width: 100%;
-		height: 100vh;
-	}
-
-	div {
-		display: flex;
-		flex-direction: column;
-		margin-bottom: 30px;
-
-		label {
-			text-align: left;
-			margin-bottom: 10px;
-			font-weight: bold;
-		}
-
-		input,
-		select,
-		textarea {
-			padding: 8px 12px;
-			border: solid 1px #808080;
-			border-radius: 6px;
-		}
-
-		select,
-		div {
-			cursor: pointer;
-		}
-
-		div {
-			border: solid 1px #808080;
-			background-color: #d5d5d5;
-			border-radius: 6px;
-			padding: 30px 60px;
-			text-align: center;
-			margin-top: 10px;
-
-			svg {
-				font-size: 1.6rem;
-				color: #808080;
-			}
-
-			input {
-				opacity: 0;
-				cursor: pointer;
-			}
-		}
-	}
-
-	button {
-		cursor: pointer;
-		background-color: #000000;
-		color: #ffffff;
-		border: none;
-		display: block;
-		width: 40%;
-		padding: 12px 20px;
-		margin: 40px auto 40px auto;
-		border-radius: 10px;
-		font-size: 1.2rem;
-
-		&:hover {
-			opacity: 0.7;
-		}
-	}
-
-	a {
-		color: red;
-	}
-`;
 
 const AddFood = () => {
 	const [data, setData] = useState({
@@ -221,6 +129,7 @@ const AddFood = () => {
 					</form>
 				</FormContainer>
 			</Container>
+			<Footer />
 		</>
 	);
 };

@@ -10,11 +10,10 @@ const Container = styled.div`
 	display: flex;
 	text-align: center;
 	align-items: center;
-	color: #000000;
 `;
 
 const FormContainer = styled.div`
-	background-color: #f2f0eaed;
+	background-color: #bababa2a;
 	border: 1px solid #808080;
 	border-radius: 10px;
 	padding: 40px 100px;
@@ -29,7 +28,6 @@ const FormContainer = styled.div`
 
 	h1 {
 		margin-bottom: 50px;
-		color: #000000;
 	}
 
 	div {
@@ -51,7 +49,7 @@ const FormContainer = styled.div`
 	}
 
 	button {
-		cursor: pointer;
+		font-family: "Lora", serif;
 		background-color: #000000;
 		color: #ffffff;
 		border: none;
@@ -63,12 +61,14 @@ const FormContainer = styled.div`
 		font-size: 1.2rem;
 
 		&:hover {
-			opacity: 0.7;
+			color: #000;
+			background-color: #f59f00;
 		}
 	}
 
 	a {
-		color: red;
+		text-decoration: underline;
+		color: #f59f00;
 	}
 `;
 
