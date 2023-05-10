@@ -8,6 +8,8 @@ export { Header } from "./common/Header/Header";
 export { Footer } from "./common/Footer/Footer";
 // Food detail
 export { FoodDetail } from "./common/FoodDetail/FoodDetail";
+// Food card
+export { FoodCard } from "./common/FoodCard/FoodCard";
 
 /**
  * Pages
@@ -16,7 +18,6 @@ export { FoodDetail } from "./common/FoodDetail/FoodDetail";
 // Home page
 export { Banner } from "./pages/Home/Banner";
 export { SelectFood } from "./pages/Home/SelectFood";
-export { HomeFoodCard } from "./pages/Home/HomeFoodCard";
 
 // Menu page
 export { MenuContent } from "./pages/Menu/MenuContent";

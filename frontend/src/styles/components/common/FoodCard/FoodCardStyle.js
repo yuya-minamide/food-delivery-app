@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-const FoodCardContainer = styled.div`
+export const FoodCardContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -16,25 +16,15 @@ const FoodCardContainer = styled.div`
 	}
 `;
 
-const FoodImage = styled(Image)`
+export const FoodImage = styled(Image)`
 	height: 200px;
 `;
 
-const FoodName = styled.p`
+export const FoodName = styled.p`
 	margin: 12px 0 12px 12px;
 	font-size: 1.4rem;
 `;
 
-const FoodPrice = styled.p`
+export const FoodPrice = styled.p`
 	margin: 0 0 12px 12px;
 `;
-
-export function HomeFoodCard({ food }) {
-	return (
-		<FoodCardContainer>
-			<FoodImage src={food.image} width={300} height={300} alt="food-image" />
-			<FoodName>{food.name}</FoodName>
-			<FoodPrice>${food.price}</FoodPrice>
-		</FoodCardContainer>
-	);
-}
