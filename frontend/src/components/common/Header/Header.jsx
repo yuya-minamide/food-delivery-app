@@ -14,8 +14,8 @@ const HeaderContainer = styled.header`
 	top: 0;
 	left: 0;
 	width: 100%;
-	background-color: #c6c6c6a2;
-	box-shadow: 0px 15px 10px -5px rgba(255, 255, 255, 0.3);
+	background-color: #fff;
+	border-bottom: solid 1px #b7b7b7;
 	z-index: 10;
 	display: flex;
 	justify-content: space-between;
@@ -28,6 +28,7 @@ const LogoContainer = styled.div`
 	align-items: center;
 	font-size: 1.5rem;
 	font-weight: 400;
+	font-family: "Kalam", cursive;
 
 	svg {
 		margin-right: 6px;
@@ -64,14 +65,14 @@ const NavContainer = styled.div`
 				transition: all 0.2s ease;
 
 				&:hover {
-					color: white;
+					color: #f59f00;
 				}
 
 				span {
 					position: absolute;
 					top: 0px;
 					right: 6px;
-					background-color: red;
+					background-color: #f59f00;
 					color: white;
 					border-radius: 50%;
 					padding: 5px;
@@ -93,7 +94,7 @@ const NavContainer = styled.div`
 				transition: all 0.2s ease;
 
 				&:hover {
-					color: white;
+					color: #f59f00;
 				}
 			}
 		}
@@ -109,7 +110,7 @@ const Name = styled.p`
 	transition: all 0.2s ease;
 
 	&:hover {
-		color: white;
+		color: #f59f00;
 	}
 `;
 
@@ -117,8 +118,8 @@ const PersonalContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	position: absolute;
-	background-color: #c6c6c6a2;
-	top: 64px;
+	background-color: #fff;
+	top: 70px;
 	right: 0;
 	padding: 20px 60px 6px 16px;
 
@@ -141,7 +142,7 @@ const PersonalContainer = styled.div`
 		transition: all 0.2s ease;
 
 		&:hover {
-			color: #fff;
+			color: #f59f00;
 		}
 
 		@media screen and (max-width: 520px) {

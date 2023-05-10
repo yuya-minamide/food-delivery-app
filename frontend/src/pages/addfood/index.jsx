@@ -1,4 +1,4 @@
-import { Header } from "@/components";
+import { Footer, Header } from "@/components";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineCloudUpload } from "react-icons/ai";
@@ -13,12 +13,11 @@ const Title = styled.h1`
 
 const Container = styled.div`
 	width: 100%;
-	height: 100vh;
-	color: #000000;
+	height: 100%;
 `;
 
 const FormContainer = styled.div`
-	background-color: #f2f0eaed;
+	background-color: #bababa2a;
 	border: 1px solid #808080;
 	border-radius: 10px;
 	padding: 40px 100px;
@@ -28,7 +27,7 @@ const FormContainer = styled.div`
 	@media screen and (max-width: 520px) {
 		padding: 80px 20px 0 20px;
 		width: 100%;
-		height: 100vh;
+		height: 100%;
 	}
 
 	div {
@@ -76,7 +75,7 @@ const FormContainer = styled.div`
 	}
 
 	button {
-		cursor: pointer;
+		font-family: "Lora", serif;
 		background-color: #000000;
 		color: #ffffff;
 		border: none;
@@ -88,12 +87,9 @@ const FormContainer = styled.div`
 		font-size: 1.2rem;
 
 		&:hover {
-			opacity: 0.7;
+			color: #000;
+			background-color: #f59f00;
 		}
-	}
-
-	a {
-		color: red;
 	}
 `;
 
@@ -221,6 +217,7 @@ const AddFood = () => {
 					</form>
 				</FormContainer>
 			</Container>
+			<Footer />
 		</>
 	);
 };

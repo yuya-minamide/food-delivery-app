@@ -20,12 +20,15 @@ const SearchBar = styled.div`
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 20px;
+
+	@media (max-width: 960px) {
+		padding: 0 20px;
+	}
 `;
 
 const SearchIcon = styled(BsSearch)`
 	font-size: 1.5rem;
 	margin-right: 10px;
-	color: #fff;
 `;
 
 const SearchInput = styled.input`
@@ -47,11 +50,15 @@ const CardsWrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: ${(props) => (props.noItemsLessThanFour ? "center" : "space-between")};
-	padding: 30px 20px;
+	padding: 30px 40px;
 	gap: 20px;
 
 	@media (max-width: 960px) {
 		justify-content: center;
+
+		@media (max-width: 520px) {
+			padding: 20px;
+		}
 	}
 `;
 
@@ -61,10 +68,10 @@ const CardContainer = styled.div`
 
 	@media (max-width: 960px) {
 		flex: 0 1 calc(48% - 10px);
-	}
 
-	@media (max-width: 520px) {
-		flex: 0 1 95%;
+		@media (max-width: 520px) {
+			flex: 0 1 95%;
+		}
 	}
 `;
 

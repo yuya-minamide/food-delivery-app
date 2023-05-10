@@ -7,7 +7,7 @@ import styled from "styled-components";
 const CartItemContainer = styled.div`
 	padding: 14px;
 	margin: 15px 0;
-	background-color: #80808048;
+	background-color: #bababa2a;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -40,7 +40,7 @@ const ItemInformations = styled.div`
 `;
 
 const ItemInformation = styled.p`
-	border-bottom: solid 1px #fff;
+	border-bottom: solid 1px #000;
 
 	span {
 		font-weight: bold;
@@ -61,11 +61,13 @@ const CounterContainer = styled.div`
 
 	button {
 		padding: 6px;
-		cursor: pointer;
 		border-radius: 6px;
+		background-color: #fff;
+		border: solid 1px #000;
 
 		&:hover {
-			opacity: 0.8;
+			color: #f59f00;
+			border: solid 1px #f59f00;
 		}
 	}
 `;

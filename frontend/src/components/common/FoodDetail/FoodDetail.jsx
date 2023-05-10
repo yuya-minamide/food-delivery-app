@@ -10,7 +10,7 @@ const FoodDetailContainer = styled.div`
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(0, 0, 0, 0.295);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -19,7 +19,7 @@ const FoodDetailContainer = styled.div`
 `;
 
 const DetailCard = styled.div`
-	background-color: #808080bc;
+	background-color: #ffffffe2;
 	padding: 30px;
 	margin: 0 28%;
 	border-radius: 8px;
@@ -64,18 +64,32 @@ const DetailButtonContainer = styled.div`
 	}
 
 	button {
-		color: #fff;
-		background-color: #05011e;
+		font-family: "Lora", serif;
 		border: solid 1px #fff;
 		border-radius: 10px;
 		padding: 10px 30px;
 		font-size: 1.2rem;
 		margin-right: 10px;
-		cursor: pointer;
+	}
+`;
 
-		&:hover {
-			opacity: 0.8;
-		}
+const AddCartButton = styled.button`
+	color: #000;
+	background-color: #faac1a;
+
+	&:hover {
+		color: #000;
+		background-color: #f59f00;
+	}
+`;
+
+const BackButton = styled.button`
+	color: #fff;
+	background-color: #05011e;
+
+	&:hover {
+		color: #000;
+		background-color: #f59f00;
 	}
 `;
 
@@ -103,8 +117,8 @@ export function FoodDetail({ selectedFood, onClose }) {
 				<p>{selectedFood.restaurantname}</p>
 				<p>{selectedFood.description}</p>
 				<DetailButtonContainer>
-					<button onClick={handleAddCartProduct}>Add to cart</button>
-					<button onClick={onClose}>Go to back</button>
+					<AddCartButton onClick={handleAddCartProduct}>Add to cart</AddCartButton>
+					<BackButton onClick={onClose}>Go to back</BackButton>
 				</DetailButtonContainer>
 			</DetailCard>
 		</FoodDetailContainer>

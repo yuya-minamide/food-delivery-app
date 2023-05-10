@@ -41,16 +41,19 @@ const CardContainer = styled.div`
 const SeeMoreButtonContainer = styled.div`
 	text-align: center;
 	button {
+		font-family: "Lora", serif;
 		color: #fff;
 		background-color: #05011e;
-    border: solid 1px; #FFF;
-    border-radius: 16px;
-    padding: 20px 80px;
-    font-size: 1.2rem;
+		border-radius: 16px;
+		padding: 20px 80px;
+		font-size: 1.2rem;
+		cursor: pointer;
+		transition: all 0.2s ease;
 
-    &:hover {
-      opacity: 0.8;
-    }
+		&:hover {
+			color: #000;
+			background-color: #f59f00;
+		}
 	}
 `;
 
