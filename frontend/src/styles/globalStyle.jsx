@@ -1,3 +1,7 @@
+import { createGlobalStyle } from "styled-components";
+
+export const GlobalStyle = createGlobalStyle`
+
 @font-face {
 	font-family: "Lora", serif;
 	src: url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap");
@@ -62,3 +66,4 @@ button {
 	cursor: pointer;
 	transition: all 0.2s ease;
 }
+`;
