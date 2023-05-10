@@ -20,3 +20,8 @@ export { HomeFoodCard } from "./pages/Home/HomeFoodCard";
 
 // Menu page
 export { MenuContent } from "./pages/Menu/MenuContent";
+
+// Cart page
+export { CartContent } from "./pages/Cart/CartContent";
+export { CartItem } from "./pages/Cart/CartItem";
+export { Amount } from "./pages/Cart/Amount";

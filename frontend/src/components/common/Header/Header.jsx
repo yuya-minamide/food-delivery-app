@@ -166,6 +166,9 @@ export function Header() {
 		toast.success("Logout successfully");
 	};
 
+	const foodCartItem = useSelector((state) => state.food.cartItem);
+	const totalQuantity = foodCartItem.reduce((acc, item) => acc + item.qty, 0);
+
 	return (
 		<HeaderContainer>
 			<Toaster position="top-center" />
@@ -186,10 +189,10 @@ export function Header() {
 						</Link>
 					</li>
 					<li>
-						<Link href="/">
+						<Link href="/cart">
 							<div style={{ position: "relative" }}>
 								<BsCart4 />
-								<span>00</span>
+								{totalQuantity < 10 ? <span>{"0" + totalQuantity}</span> : <span>{totalQuantity}</span>}
 							</div>
 						</Link>
 					</li>
