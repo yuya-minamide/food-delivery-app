@@ -1,5 +1,8 @@
 import Image from "next/image";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { addCartItem } from "@/redux/foodSlice";
+import { Toaster } from "react-hot-toast";
 
 const FoodDetailContainer = styled.div`
 	position: fixed;
@@ -24,10 +27,10 @@ const DetailCard = styled.div`
 
 	@media (max-width: 960px) {
 		margin: 0 10%;
-	}
 
-	@media (max-width: 520px) {
-		margin: 0;
+		@media (max-width: 520px) {
+			margin: 0;
+		}
 	}
 
 	h1 {
@@ -77,8 +80,21 @@ const DetailButtonContainer = styled.div`
 `;
 
 export function FoodDetail({ selectedFood, onClose }) {
+	const dispatch = useDispatch();
+	const handleAddCartProduct = (e) => {
+		dispatch(
+			addCartItem({
+				id: selectedFood._id,
+				name: selectedFood.name,
+				price: selectedFood.price,
+				image: selectedFood.image,
+			})
+		);
+	};
+
 	return (
 		<FoodDetailContainer>
+			<Toaster position="top-center" />
 			<DetailCard>
 				<h1>Detail</h1>
 				<FoodImage src={selectedFood.image} alt={selectedFood.name} width={200} height={200} />
@@ -87,7 +103,7 @@ export function FoodDetail({ selectedFood, onClose }) {
 				<p>{selectedFood.restaurantname}</p>
 				<p>{selectedFood.description}</p>
 				<DetailButtonContainer>
-					<button onClick={onClose}>Add to cart</button>
+					<button onClick={handleAddCartProduct}>Add to cart</button>
 					<button onClick={onClose}>Go to back</button>
 				</DetailButtonContainer>
 			</DetailCard>
