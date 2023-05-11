@@ -1,7 +1,6 @@
 /**
  * Common
  */
-
 // Header
 export { Header } from "./common/Header/Header";
 // Footer
@@ -14,7 +13,6 @@ export { FoodCard } from "./common/FoodCard/FoodCard";
 /**
  * Pages
  */
-
 // Home page
 export { Banner } from "./pages/Home/Banner";
 export { SelectFood } from "./pages/Home/SelectFood";
