@@ -1,5 +1,7 @@
-import { FoodDetail, FoodCard } from "@/components";
-import { useState } from "react";
+import { FoodDetail, FoodCard, Loading } from "@/components";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setDataFood } from "@/redux/foodSlice";
 import {
 	CardContainer,
 	CardsWrapper,
@@ -11,9 +13,12 @@ import {
 	SearchInput,
 } from "@/styles/components/pages/Menu/MenuContentStyle";
 
-export function MenuContent({ foodData }) {
+export function MenuContent() {
+	const dispatch = useDispatch();
+	const foodData = useSelector((state) => state.food);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [selectedFood, setSelectedFood] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const filteredFoodData = Array.isArray(foodData.foodList)
 		? foodData.foodList.filter(
@@ -36,6 +41,16 @@ export function MenuContent({ foodData }) {
 		setSelectedFood(null);
 	};
 
+	useEffect(() => {
+		setIsLoading(true);
+		(async () => {
+			const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/food`);
+			const resData = await res.json();
+			dispatch(setDataFood(resData));
+			setIsLoading(false);
+		})();
+	}, []);
+
 	return (
 		<MenuContainer>
 			<MenuTittle>Menu</MenuTittle>
@@ -43,7 +58,9 @@ export function MenuContent({ foodData }) {
 				<SearchIcon />
 				<SearchInput type="text" value={searchQuery} onChange={handleSearchInputChange} placeholder="Search for food" />
 			</SearchBar>
-			{filteredFoodData.length === 0 ? (
+			{isLoading ? (
+				<Loading />
+			) : filteredFoodData.length === 0 ? (
 				<NoFoodMessage>No foods...</NoFoodMessage>
 			) : (
 				<CardsWrapper noItemsLessThanFour={filteredFoodData.length < 4}>

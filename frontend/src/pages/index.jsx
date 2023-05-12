@@ -1,18 +1,20 @@
-import { Banner, Footer, Header, SelectFood } from "../components";
+import { Banner, Footer, Header, Loading, SelectFood } from "../components";
 import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setDataFood } from "../redux/foodSlice";
 
 export default function Home() {
 	const dispatch = useDispatch();
 	const foodData = useSelector((state) => state.food);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		(async () => {
 			const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/food`);
 			const resData = await res.json();
 			dispatch(setDataFood(resData));
+			setIsLoading(false);
 		})();
 	}, []);
 
@@ -27,7 +29,7 @@ export default function Home() {
 
 			<Header />
 			<Banner />
-			<SelectFood foodData={foodData} />
+			{isLoading ? <Loading /> : <SelectFood foodData={foodData} />}
 			<Footer />
 		</>
 	);

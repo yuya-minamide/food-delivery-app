@@ -9,6 +9,8 @@ export { Footer } from "./common/Footer/Footer";
 export { FoodDetail } from "./common/FoodDetail/FoodDetail";
 // Food card
 export { FoodCard } from "./common/FoodCard/FoodCard";
+// Loading
+export { Loading } from "./common/Loading/Loading";
 
 /**
  * Pages
