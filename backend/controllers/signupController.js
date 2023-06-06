@@ -1,22 +1,28 @@
+import bcrypt from "bcrypt";
 import { User } from "../models/User.js";
 
-export const signupController = (req, res) => {
-	const { email } = req.body;
+export const signupController = async (req, res) => {
+	const { nickName, email, password } = req.body;
 
-	User.findOne({ email: email })
-		.then((result) => {
-			if (result) {
-				res.send({ message: "Email id is already register!", alert: false });
-			} else {
-				const data = new User(req.body);
-				return data.save();
-			}
-		})
-		.then(() => {
-			res.send({ message: "Successfully sign up", alert: true });
-		})
-		.catch((err) => {
-			console.log(err);
-			res.status(500).send({ message: "Internal server error", alert: false });
-		});
+	try {
+		const user = await User.findOne({ email: email });
+		if (user) {
+			res.send({ message: "Email id is already registered!", alert: false });
+		} else {
+			const salt = await bcrypt.genSalt(10);
+			const hashedPassword = await bcrypt.hash(password, salt);
+
+			const newUser = new User({
+				nickName: nickName,
+				email: email,
+				password: hashedPassword,
+			});
+
+			await newUser.save();
+			res.send({ message: "Successfully signed up", alert: true });
+		}
+	} catch (err) {
+		console.log(err);
+		res.status(500).send({ message: "Internal server error", alert: false });
+	}
 };
