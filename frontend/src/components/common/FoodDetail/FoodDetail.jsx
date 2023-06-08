@@ -10,7 +10,7 @@ import {
 	FoodImage,
 } from "@/styles/components/common/FoodDetail/FoodDetailStyle";
 
-export function FoodDetail({ selectedFood, onClose }) {
+export function FoodDetail({ selectedFood, onClose, showAddToCartButton = true }) {
 	const dispatch = useDispatch();
 	const handleAddCartProduct = (e) => {
 		dispatch(
@@ -34,7 +34,7 @@ export function FoodDetail({ selectedFood, onClose }) {
 				<p>{selectedFood.restaurantname}</p>
 				<p>{selectedFood.description}</p>
 				<DetailButtonContainer>
-					<AddCartButton onClick={handleAddCartProduct}>Add to cart</AddCartButton>
+					{showAddToCartButton && <AddCartButton onClick={handleAddCartProduct}>Add to cart</AddCartButton>}
 					<BackButton onClick={onClose}>Go to back</BackButton>
 				</DetailButtonContainer>
 			</DetailCard>

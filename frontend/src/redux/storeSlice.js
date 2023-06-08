@@ -11,7 +11,6 @@ export const storeSlice = createSlice({
 	initialState,
 	reducers: {
 		storeLogin: (state, action) => {
-			console.log(action.payload.data);
 			state._id = action.payload.data._id;
 			state.storeName = action.payload.data.storeName;
 			state.email = action.payload.data.email;

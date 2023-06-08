@@ -7,7 +7,7 @@ export const storesignupController = async (req, res) => {
 	try {
 		const user = await Store.findOne({ email: email });
 		if (user) {
-			res.send({ message: "Email id is already registered!", alert: false });
+			res.send({ error: "Email id is already registered!" });
 		} else {
 			const salt = await bcrypt.genSalt(10);
 			const hashedPassword = await bcrypt.hash(password, salt);
@@ -19,10 +19,10 @@ export const storesignupController = async (req, res) => {
 			});
 
 			await newStore.save();
-			res.send({ message: "Successfully signed up", alert: true });
+			res.send({ message: "Successfully signed up" });
 		}
 	} catch (err) {
-		console.log(err);
-		res.status(500).send({ message: "Internal server error", alert: false });
+		console.error(err);
+		res.status(500).json({ message: "Internal server error" });
 	}
 };

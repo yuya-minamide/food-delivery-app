@@ -26,3 +26,7 @@ export { MenuContent } from "./pages/Menu/MenuContent";
 export { CartContent } from "./pages/Cart/CartContent";
 export { CartItem } from "./pages/Cart/CartItem";
 export { Amount } from "./pages/Cart/Amount";
+
+// Edit list page
+export { EditContent } from "./pages/EditList/EditContent";
+export { EditList } from "./pages/EditList/EditList";
