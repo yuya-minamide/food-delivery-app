@@ -29,7 +29,7 @@ const Login = () => {
 		const { email, password } = data;
 
 		if (email && password) {
-			const fetchData = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/login`, {
+			const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/login`, {
 				method: "POST",
 				headers: {
 					"content-type": "application/json",
@@ -37,10 +37,10 @@ const Login = () => {
 				body: JSON.stringify(data),
 			});
 
-			const resData = await fetchData.json();
+			const resData = await response.json();
+			resData.message ? toast.success(resData.message) : toast.error(resData.error);
 
-			toast.success(resData.message);
-			if (resData.alert) {
+			if (resData.message) {
 				dispatch(userLogin(resData));
 				dispatch(storeLogin(resData));
 				setTimeout(() => {

@@ -26,7 +26,7 @@ const StoreSignup = () => {
 		const { storeName, email, password, confirmPassword } = data;
 		if (storeName && email && password && confirmPassword) {
 			if (password === confirmPassword) {
-				const fetchData = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/storesignup`, {
+				const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/storesignup`, {
 					method: "POST",
 					headers: {
 						"content-type": "application/json",
@@ -34,10 +34,10 @@ const StoreSignup = () => {
 					body: JSON.stringify(data),
 				});
 
-				const resData = await fetchData.json();
+				const resData = await response.json();
+				resData.message ? toast.success(resData.message) : toast.error(resData.error);
 
-				toast.success(resData.message);
-				if (resData.alert) router.push("/login");
+				if (resData.message) router.push("/login");
 			} else {
 				toast.error("Password and confirm password are not equal");
 			}

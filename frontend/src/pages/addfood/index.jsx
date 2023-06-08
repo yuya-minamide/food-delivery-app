@@ -48,7 +48,7 @@ const AddFood = () => {
 
 		const { restaurantname, name, category, price, image, description } = data;
 		if (restaurantname && name && category && price && image && description) {
-			const fetchData = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/addfood`, {
+			const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/addfood`, {
 				method: "POST",
 				headers: {
 					"content-type": "application/json",
@@ -56,8 +56,8 @@ const AddFood = () => {
 				body: JSON.stringify(data),
 			});
 
-			const resData = await fetchData.json();
-			toast.success(resData.message);
+			const resData = await response.json();
+			resData.message ? toast.success(resData.message) : toast.error(resData.error);
 
 			setData(() => {
 				return {

@@ -8,6 +8,7 @@ export const EditListContainer = styled.div`
 	gap: 2rem;
 	border: solid 1px #b7b7b7;
 	padding: 10px 20px;
+	margin: 12px 0;
 
 	@media screen and (max-width: 520px) {
 		flex-direction: column;

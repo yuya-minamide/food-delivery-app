@@ -75,7 +75,7 @@ const Edit = () => {
 				});
 
 				const resData = await response.json();
-				toast.success(resData.message);
+				resData.message ? toast.success(resData.message) : toast.error(resData.error);
 
 				setData({
 					restaurantname: "",

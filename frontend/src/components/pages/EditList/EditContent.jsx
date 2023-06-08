@@ -12,12 +12,15 @@ export function EditContent() {
 	const filteredFood = foodData.filter((food) => food.storeid === storeid);
 
 	const [isLoading, setIsLoading] = useState(true);
+	const setFoodList = (updatedFoodList) => {
+		dispatch(setDataFood(updatedFoodList));
+	};
 
 	useEffect(() => {
 		setIsLoading(true);
 		(async () => {
-			const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/editlist`);
-			const resData = await res.json();
+			const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/editlist`);
+			const resData = await response.json();
 			dispatch(setDataFood(resData));
 			setIsLoading(false);
 		})();
@@ -30,7 +33,7 @@ export function EditContent() {
 			) : filteredFood.length === 0 ? (
 				<NoFoodContainer>No foods...</NoFoodContainer>
 			) : (
-				<EditList foodList={filteredFood} />
+				<EditList foodList={filteredFood} setFoodList={setFoodList} />
 			)}
 		</EditContentContainer>
 	);

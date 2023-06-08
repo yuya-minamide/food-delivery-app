@@ -44,8 +44,8 @@ export function MenuContent() {
 	useEffect(() => {
 		setIsLoading(true);
 		(async () => {
-			const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/food`);
-			const resData = await res.json();
+			const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/food`);
+			const resData = await response.json();
 			dispatch(setDataFood(resData));
 			setIsLoading(false);
 		})();
