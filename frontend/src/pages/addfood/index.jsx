@@ -67,6 +67,7 @@ const AddFood = () => {
 					price: "",
 					image: "",
 					description: "",
+					storeid: storeid,
 				};
 			});
 		} else {
