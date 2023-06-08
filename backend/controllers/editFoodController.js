@@ -7,13 +7,13 @@ export const editFoodController = async (req, res) => {
 	try {
 		const updatedFood = await Food.findByIdAndUpdate(id, { name, category, price, image, description }, { new: true });
 
-		if (updatedFood) {
-			res.send({ message: "Food updated successfully", alert: true });
-		} else {
-			res.status(404).send({ message: "Food not found", alert: false });
+		if (!updatedFood) {
+			res.status(404).send({ error: "Food not found" });
 		}
+
+		res.send({ message: "Food updated successfully" });
 	} catch (err) {
-		console.log(err);
-		res.status(500).send({ message: "Internal server error", alert: false });
+		console.error(err);
+		res.status(500).json({ error: "Internal server error" });
 	}
 };

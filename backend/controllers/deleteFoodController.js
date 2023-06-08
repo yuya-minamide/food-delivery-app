@@ -1,15 +1,15 @@
 import { Food } from "../models/Food.js";
 
-export const findOneFoodController = async (req, res) => {
+export const deleteFoodController = async (req, res) => {
 	try {
 		const foodId = req.params.id;
-		const food = await Food.findById(foodId);
+		const deletedFood = await Food.findByIdAndDelete(foodId);
 
-		if (!food) {
+		if (!deletedFood) {
 			return res.status(404).json({ error: "Food not found" });
 		}
 
-		res.json(food);
+		res.send({ message: "Food deleted successfully" });
 	} catch (error) {
 		console.error(err);
 		res.status(500).json({ error: "Server error" });

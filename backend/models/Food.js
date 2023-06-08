@@ -27,9 +27,6 @@ const FoodSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	// storeid: {
-	// 	type: mongoose.Types.ObjectId,
-	// },
 	storeid: {
 		type: String,
 	},

@@ -18,9 +18,9 @@ export const loginController = async (req, res) => {
 					email: userResult.email,
 					password: userResult.password,
 				};
-				res.send({ message: "Login is successful", alert: true, data: dataSend });
+				res.send({ message: "Login is successful", data: dataSend });
 			} else {
-				res.send({ message: "Email or password is incorrect", alert: false });
+				res.send({ error: "Email or password is incorrect" });
 			}
 		} else if (storeResult) {
 			const storePasswordMatch = await bcrypt.compare(password, storeResult.password);
@@ -31,15 +31,15 @@ export const loginController = async (req, res) => {
 					email: storeResult.email,
 					password: storeResult.password,
 				};
-				res.send({ message: "Login is successful", alert: true, data: dataSend });
+				res.send({ message: "Login is successful", data: dataSend });
 			} else {
-				res.send({ message: "Email or password is incorrect", alert: false });
+				res.send({ error: "Email or password is incorrect" });
 			}
 		} else {
-			res.send({ message: "Email or password is not available, please sign up", alert: false });
+			res.send({ error: "Email or password is not available, please sign up" });
 		}
 	} catch (err) {
-		console.log(err);
-		res.send({ message: "Error occurred", alert: false });
+		console.error(err);
+		res.status(500).json({ error: "Error occurred" });
 	}
 };
