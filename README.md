@@ -20,6 +20,7 @@ This app is designed for surfers who enjoy surfing at the beach all day long. We
  <img alt="styled-components" src="./public/styled-components.png" height="40" width="40" />
  <img alt="redux-toolkit" src="./public/redux-toolkit.png" height="40" width="40" />
  <img alt="vercel" src="./public/vercel.svg" height="40" width="40" />
+  <img alt="stripe" src="./public/stripe.svg" height="40" width="40" />
 </p>
 
 ## Contributors
