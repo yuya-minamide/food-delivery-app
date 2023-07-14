@@ -12,11 +12,31 @@ export function Amount() {
 	const storeData = useSelector((state) => state.store);
 	const dispatch = useDispatch();
 	const router = useRouter();
+	const user = userData._id || storeData._id;
+
+	console.log(foodCartItem);
 
 	const handleBuy = () => {
-		if (storeData.storeName || userData.nickName) {
+		if (user) {
+			fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/create-checkout-session`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					foodCartItem,
+					userId: user,
+				}),
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					if (data.url) {
+						window.location.href = data.url;
+					}
+				})
+				.catch((err) => console.log(err.message));
+
 			dispatch(clearCart());
-			toast.success("Order successful!");
 		} else {
 			toast.error("You need to login to make a order!");
 			router.push("/login");
